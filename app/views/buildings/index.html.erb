@@ -1,0 +1,34 @@
+<div class="page-header">
+<h2> Blocks </h2>
+</div>
+
+<script>
+	$(document).ready(function(){
+    $('#myTable').DataTable();
+	});
+	</script>
+
+<% if @buildings.empty? %>
+	No Blocks added yet
+<% else %>
+	<h3> Total Blocks: <%= @buildings.size %> </h3>
+	<table class="table table-bordered" id="myTable">
+	<thead>
+	<tr> 
+	<th> Block </th> 
+	<th> Code </th>
+	<th> Landmark  </th>
+	</tr>
+	</thead>	
+
+	<tbody>
+	<% @buildings.each do |block| %>
+	<tr>
+	<td> <%= link_to block.name, building_path(block.id)%> </td>
+	<td> <%= block.code %> </td>
+	<td> <%= block.landmark %> </td>
+	</tr>
+	<% end %>
+	</tbody>
+<% end %>
+

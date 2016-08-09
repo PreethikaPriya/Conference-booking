@@ -1,0 +1,63 @@
+<div class="page-header">
+<h3> Book Conference Room</h3>
+</div>
+
+<%= form_for @booking do |f| %>
+<% if @booking.errors.any? %>
+	<h2> These errors prohibited the form from being saved </h2>
+	<ul style="color:red;">
+	<% @booking.errors.full_messages.each do |msg| %>
+		<li> <%= msg %> </li>
+	<% end %>
+	</ul>
+<% end %>	
+<% end %>
+
+	
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Create Booking
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Book Conference Room</h4>
+      </div>
+      <div class="modal-body">
+		<%= form_for @booking do |f| %>
+
+		<!--<label> User Id </label><br/>
+		<%= f.text_field :user_id %> <br/> -->
+		<div class="form-group">
+		<label> Conference Room </label><br/>
+		<%= f.collection_select :conference_room_id, ConferenceRoom.all, :id, :name, {prompt:"select client"} ,{class: "form-control"}%><br/>
+		</div>
+
+		<div class="form-group">
+		<label> Start Date time </label> <br/>
+		<%= f.datetime_select :start_date_time, class:"form-control" %> <br/>
+		</div>
+
+		<div class="form-group">
+		<label> End Date time </label> <br/>
+		<%= f.datetime_select :end_date_time, class:"form-control" %> <br/>
+		</div>
+
+
+
+		<%= f.submit%>
+
+		<% end %>
+
+		</div>
+      	<div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+

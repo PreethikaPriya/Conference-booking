@@ -1,0 +1,23 @@
+<div class="page-header">
+<h3> Edit Facility </h3>
+</div>
+
+<%= form_for @facility do |f| %>
+<% if @facility.errors.any? %>
+ 	<h2> These errors prohibited the form from being saved </h2>
+ 	<ul style="color:red;">
+ 	<% @facility.errors.full_messages.each do |msg| %>
+ 		<li> <%= msg %> </li>
+ 	<% end %>
+ 	</ul>
+<% end %>
+<% end %>
+
+<%= form_for @facility do |f| %>
+
+	<label> Facility </label> <br/>
+	<%= f.text_field :name %> <br/>
+
+	<%= f.submit %>	
+
+<% end %>

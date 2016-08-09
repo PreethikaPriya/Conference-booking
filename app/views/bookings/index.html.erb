@@ -1,0 +1,62 @@
+<div class="row">
+	<div class="col-md-8">
+		<div class="page-header">
+			<h2> List of Bookings </h2>
+		</div>
+
+		<script>
+		$(document).ready(function(){
+	    $('#myTable').DataTable();
+		});
+		</script>
+
+		<% if @bookings.empty? %>
+			<h3> No bookings found </h3>
+		<% else %>
+			<h3> Total Bookings : <%= @bookings.size %> </h3>
+			<table class="table table-stripped" id="myTable">
+			<thead>
+			<tr>
+				<th> Booking Id </th>
+				<th> User Id </th>
+				<th> Conference Room </th>
+				<th> Start Date-Time </th>
+				<th> End Date-time </th>
+			</tr>
+			</thead>
+
+			<tbody>
+			<% @bookings.each do |booking| %>
+				<tr>
+					<td> <%= link_to booking.id,booking_path(booking.id) %> </td>
+					<td> <%= booking.user_id %> </td>
+					<td> <%= ConferenceRoom.find(booking.conference_room_id).name%> </td>
+					<td> <%= booking.start_date_time %> </td>
+					<td> <%= booking.end_date_time %> </td>
+				</tr>
+			<% end %>	
+			</tbody>	
+			</table>
+		<% end %>
+	</div>
+	
+	<div class="col-md-4">
+		<div class="page-header">
+			<h3> Statistics based on Booking </h3>
+		</div>	
+		<% data = {}
+		rooms = ConferenceRoom.all
+		rooms.each do |room|
+			data[room.name] = Booking.where('conference_room_id =?',room.id).count
+		 end %>	
+		<br/>
+		<br/>
+
+		<%= column_chart(data) %>
+
+		<%#<%= column_chart(data) %>
+		<%#<%= pie_chart(data) %>
+		<%#<%= bar_chart(data) %>
+		<%#<%= pie_chart(data) %>
+	</div>		
+</div>

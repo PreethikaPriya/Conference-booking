@@ -1,0 +1,30 @@
+<div class="page-header">
+<h2> Facilities </h2>
+</div>
+
+	<script>
+	$(document).ready(function(){
+    $('#myTable').DataTable();
+	});
+	</script>
+
+<% if @facilities.empty? %>
+	No facilities added yet
+<% else %>
+	<h3> Total Facilities available : <%= @facilities.size %> </h3>
+	<table class="table table-bordered" id="myTable">
+	<thead>
+	<tr> 
+	<th> Facility </th> 
+	</tr>
+	</thead>	
+
+	<tbody>
+	<% @facilities.each do |facility| %>
+	<tr>
+	<td> <%= link_to facility.name,facility_path(facility.id)%> </td>
+	</tr>
+	<% end %>
+	</tbody>
+<% end %>
+

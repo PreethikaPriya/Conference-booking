@@ -1,0 +1,17 @@
+<% if current_user.email="preethikapriya@gmail.com" %>
+	
+	<h3> Facility :<%= @facility.name %> </h3>
+
+	<%= link_to edit_facility_path(@facility.id)  do %>
+		<span class="glyphicon glyphicon-pencil"> </span>
+	<% end %>
+
+	<%= link_to  facility_path(@facility.id), data:{method: :delete, confirm: "are you sure?"}  do %>
+		<span class="glyphicon glyphicon-trash"> </span>
+	<% end %>	
+
+<% else%>
+	
+	<h3> Facility :<%= @facility.name %> </h3>
+
+<% end %>	

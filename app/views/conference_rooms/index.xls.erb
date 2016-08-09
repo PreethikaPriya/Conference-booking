@@ -1,0 +1,64 @@
+
+<div class="page-header">
+<h3> Listing conference rooms</h3>
+</div>
+
+<% if @conference_rooms.empty? %>
+	<p> no conference rooms found </p>
+<% else %> 
+	<% if current_user.email == "preethikapriya@gmail.com"  %>
+		<h4> Total Conference Rooms: <%= @conference_rooms.size %> </h4>
+		<table border="1">
+		<thead>
+			<tr>
+				<th> Conference Room  </th>
+				<th> Building </th>
+				<th> Floor </th>
+				<th> Landmark </th>
+			 <!-- <th> Booking </th> -->
+			</tr>
+		</thead>
+
+		<tbody>
+			<% @conference_rooms.each do |room| %>
+				<tr>
+					<td> <%= link_to room.name, conference_room_url(room.id)%> </td>
+					<td> <%= room.building_id %> </td>
+					<td> <%= room.floor %> </td>
+					<td> <%= room.landmark %> </td>
+					<!--<td> <%= link_to  conference_room_url(room.id) do %>  
+						<span class="glyphicon glyphicon-eye-open"> </span>
+					<% end %> -->
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+
+	<% else %>
+
+		<h4> Total Conference Rooms: <%= @conference_rooms.size %> </h4>
+		<table border="1">
+		<thead>
+			<tr>
+				<th> Conference Room  </th>
+				<th> Building </th>
+				<th> Floor </th>
+				<th> Landmark </th>
+				<!-- <th> Booking </th> -->
+			</tr>
+		</thead>
+
+		<tbody>
+			<% @conference_rooms.each do |room| %>
+				<tr>
+					<td> <%= link_to room.name, conference_room_url(room.id)%> </td>
+					<td> <%= room.building_id %> </td>
+					<td> <%= room.floor %> </td>
+					<td> <%= room.landmark %> </td>
+					<!--<td> <%= link_to "show_booking", conference_room_path(room.id) %>  </td> -->
+				</tr>
+			<% end %>
+		</tbody> 
+	<% end %>
+<% end %>
+

@@ -1,0 +1,20 @@
+<% if current_user.email="preethikapriya@gmail.com" %>
+	
+	<h3> Block :<%= @building.name %> </h3>
+	<h3> Block Code :<%= @building.code %> </h3>
+	<h3> Block Landmark:<%= @building.landmark %> </h3>
+
+
+	<%= link_to edit_building_path(@building.id)  do %>
+		<span class="glyphicon glyphicon-pencil"> </span>
+	<% end %>
+
+	<%= link_to  building_path(@building.id), data:{method: :delete, confirm: "are you sure?"}  do %>
+		<span class="glyphicon glyphicon-trash"> </span>
+	<% end %>	
+
+<% else%>
+	
+	<h3> building :<%= @building.name %> </h3>
+
+<% end %>	

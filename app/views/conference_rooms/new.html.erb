@@ -1,0 +1,58 @@
+<div class="page-header">
+<h3> Add confernce Rooms </h3>
+</div>
+
+<%= form_for @conference_room do |f| %>
+<% if @conference_room.errors.any? %>
+<h4> These errors have prohobited the form from being saved : </h4>
+<ul style="color:red;" >
+	<% @conference_room.errors.full_messages.each do |msg| %>
+	  	<li> <%= msg %> </li>
+	<% end %>
+</ul>
+<% end %>
+<% end %>  
+
+<div class="row">
+<div class="col-md-7">
+<%= form_for @conference_room do |f| %>
+
+	<div class="form-group">
+	<label> Conference Room Name</label> <br/>
+	<%= f.text_field :name, class:"form-control" %> <br/>
+	</div>
+
+	<div class="form-group">
+	<label> Block</label> <br/>
+	<%= f.collection_select :building_id, Building.all, :id, :name , {class:"form-control"}%> <br/>
+	</div>
+
+	<div class="form-group">
+	<label> Floor </label> <br/>
+	<%= f.text_field :floor, class:"form-control" %> <br/>
+	</div>
+
+	<div class="form-group">
+	<label> Landmark </label> <br/>
+	<%= f.text_field :landmark,class:"form-control" %> <br/>
+	</div>
+	 
+	 <div class="form-group">
+		<label> Select Facilities </label> <br/>
+		<%= f.collection_check_boxes :facility_ids,Facility.all,:id,:name,{class:"form-control"} do |b| %>
+			<%= b.check_box %>
+			<%= b.label %>
+			<br/>
+		<% end %>
+
+	</div>
+
+<%= f.submit %>
+</div>
+
+<div class="col-md-5">
+</div>
+</div>
+
+<% end %>
+

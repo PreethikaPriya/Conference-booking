@@ -1,0 +1,65 @@
+<div class="page-header">
+<h3> <%= @conference_room.name %> </h3>
+</div>
+
+<h4> Building : <%= Building.find(@conference_room.building_id ).name%> </h4>
+<h4> Floor : <%= @conference_room.floor %> </h4>
+<h4> Landmark :<%= @conference_room.landmark%> </h4>
+<h4> Facilities Available: </h4>
+
+<% facility = @conference_room.facilities.pluck(:name) %>
+<ul>
+<% facility.each do |facility| %>
+	<li> <%= facility %> </li>
+<% end %>
+</ul>
+
+<% if current_user.is_admin? %>
+
+	<%= link_to edit_conference_room_path(@conference_room.id) do %>
+			<span class="glyphicon glyphicon-pencil"> </span>
+	<% end %>
+
+	<%= link_to conference_room_path(@conference_room.id),data:{method: :delete, confirm: "are you sure?"} do %>
+			<span class="glyphicon glyphicon-trash"></span>
+	<% end %>
+
+	<% if @conference_room.bookings.empty? %> 
+		<h4> No bookings found </h4>
+		
+	<% else %> 
+
+		<h3> Total bookings : <%= @conference_room.bookings.size %> </h3>
+
+		<table class="table table-stripped">
+		<thead>
+		<tr>
+			<th> Booked By User </th>
+			<th> Start Time </th>
+			<th> End Time </th>
+		</tr>
+		</thead>
+		<tbody>
+		<% @conference_room.bookings.each do |booking| %>
+		<tr>
+			<td> <%= booking.user_id %> </td>
+			<td> <%= booking.start_date_time %> </td>
+			<td> <%= booking.end_date_time %> </td>
+		</tr>
+		</tbody>
+		<% end %>
+		</table>
+
+		<!-- <ul>
+			<% @conference_room.bookings.each do |booking| %>
+				<h4> <li> Booked by User Id : <%= booking.user_id %> </li> <h4/>
+				<h4> <li> Start time : <%= booking.start_date_time %> </h4>
+				<h4> <li> End time : <%= booking.end_date_time %> </li> </h4>
+			<% end %>
+		</ul> -->
+	<% end %>
+<% else %>
+	<h2> <%= link_to "Book Room", new_booking_path, class:"btn btn-success" %> </h2>
+<% end %>		
+
+<%#<%= link_to "Home", conference_rooms_path %> 

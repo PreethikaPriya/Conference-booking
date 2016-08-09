@@ -1,0 +1,30 @@
+<div class="page-header">
+<h3> Add Facility </h3>
+</div>
+
+<%= form_for @facility do |f| %>
+<% if @facility.errors.any? %>
+ 	<h2> These errors prohibited the form from being saved </h2>
+ 	<ul style="color:red;">
+ 	<% @facility.errors.full_messages.each do |msg| %>
+ 		<li> <%= msg %> </li>
+ 	<% end %>
+ 	</ul>
+<% end %>
+<% end %>
+
+<div class="row">
+<div class="col-md-6">
+<%= form_for @facility do |f| %>
+
+	<div class="form-group">
+	<label> Facility </label> <br/>
+	<%= f.text_field :name, class:"form-control"  %> <br/>
+	</div>
+
+	<%= f.submit %>	
+
+<% end %>
+</div>
+</div>
+
